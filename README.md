@@ -203,7 +203,35 @@ if(status == 200){
     print("...setupAction response...------$jsonResponse.");
 ```
 
-# 9. Logout
+# 9. connect
+
+``` javascript
+    var reqData = {
+      "port" :8080 // Required
+    };
+    var jsonResponse = await Nearpay.connect(reqData) ;
+```
+
+# 10. show
+
+``` javascript
+    var jsonResponse = await Nearpay.show() ;
+```
+
+# 11. Connect Session 
+
+``` javascript
+     var jsonResponse = await Nearpay.getSession() ;
+```
+
+# 12. Connect Disconnect 
+
+``` javascript
+     var jsonResponse =  await Nearpay.disConnect() ;
+```
+
+
+# 13. Logout
 
 ```dart
 var jsonResponse = await Nearpay.logout();
