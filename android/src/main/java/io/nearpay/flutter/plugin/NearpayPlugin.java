@@ -229,6 +229,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 sendResponse(paramMap);
             } else {
                 nearPay = new NearPay(this.context, getAuthType(authType, authvalue), locale, env);
+                nearpayConnect = new NearpayProxy((Application) this.context.getApplicationContext(), nearPay);
+
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code, "NearPay initialized");
                 sendResponse(paramMap);
             }
@@ -253,24 +255,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             }
         } else if (call.method.equals("receiptToImage")) {
 
-        } else if (call.method.equals("connect")) {
-            int portNumber = call.argument("port") == null ? 8080 : call.argument("port");
-            Log.i("param port no....", "" + portNumber);
-            if (nearPay == null) {
-                Log.i("purchase....", "initialise nil");
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-                sendResponse(paramMap);
-            } else if (portNumber <= -1) {
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                        "Port number parameter missing");
-                sendResponse(paramMap);
-            } else {
-                nearpayConnect = new NearpayProxy((Application) this.context.getApplicationContext(), nearPay,null, portNumber);
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code, "NearPay Connect initialized");
-                sendResponse(paramMap);
-            }
-        } else if (call.method.equals("show")) {
+        } else if (call.method.equals("proxyShowConnection")) {
             if (nearpayConnect == null) {
                 Log.i("Connect....", "initialise nil");
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
@@ -280,7 +265,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 nearpayConnect.showConnection();
             }
 
-        } else if (call.method.equals("disConnect")) {
+        } else if (call.method.equals("proxyDisconnect")) {
             if (nearpayConnect == null) {
                 Log.i("Connect....", "initialise nil");
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,

@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final tokenKey = "f.alhajeri@nearpay.io";
+  final tokenKey = "<Your email>";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
 
@@ -267,40 +267,27 @@ class _MyAppState extends State<MyApp> {
           TextButton(
             onPressed: () async {
               // Respond to button press
-              connectAction();
-            },
-            child: const Text("Connect"),
-          ),
-          TextButton(
-            onPressed: () async {
-              // Respond to button press
               getSessionAction();
             },
-            child: const Text("Session"),
+            child: const Text("proxy/ Session"),
           ),
           TextButton(
             onPressed: () async {
               // Respond to button press
               disConnectAction();
             },
-            child: const Text("Disconnect"),
+            child: const Text("proxy/ Disconnect"),
           ),
           TextButton(
             onPressed: () async {
               // Respond to button press
               showAction();
             },
-            child: const Text("Show"),
+            child: const Text("proxy/ Show"),
           ),
         ]),
       ),
     );
-  }
-
-  connectAction() async {
-    var reqData = {"port": 8080};
-    var jsonResponse = await Nearpay.connect(reqData);
-    print("...connectAction response...------$jsonResponse.");
   }
 
   disConnectAction() async {
